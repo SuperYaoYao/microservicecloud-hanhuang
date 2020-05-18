@@ -1,0 +1,28 @@
+server:
+  port: 9527
+  
+spring: 
+  application: 
+    name: microservicecloud-zuul-gateway
+    
+eureka:
+  client:                                                   #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true  
+    
+zuul: 
+  prefix: /hanhuang
+#  ignored-services: microservicecloud-dept 单个
+  ignored-services: "*" #多个
+  routes: 
+    mydept.serviceId: microservicecloud-dept
+    mydept.path: /mydept/**
+    
+info:
+  app.name: hanhuang-microservicecloud
+  company.name: www.hanhuang.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version  
